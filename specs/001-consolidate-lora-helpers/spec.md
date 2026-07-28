@@ -1,4 +1,4 @@
-# Feature Specification: Consolidate LoRa Helpers into Shared Library
+# Feature Specification: Consolidate LoRa Helpers into Single Header & Cpp Library
 
 **Feature Branch**: `001-consolidate-lora-helpers`  
 **Created**: 2026-07-28  
@@ -10,44 +10,43 @@
 ## User Scenarios & Testing
 
 ### User Story 1 - Feasibility & Pairwise Diff Audit (Priority: P1)
-As a developer maintaining LoRaFarmNet, I want a complete diff audit of `Ra01S.h`, `LoRaHelper.h`, `LoraMsg.h`, and `LoraMsg.cpp` across all 7 device repositories before consolidation so that all repo-specific variations are identified and approved by the maintainer.
+As a developer maintaining LoRaFarmNet, I want a complete diff audit of `Ra01S.h`, `LoRaHelper.h`, `LoraMsg.h`, and `LoraMsg.cpp` across all 7 device repositories before consolidation so that all repo-specific variations are identified and presented for maintainer selection.
 
-**Why this priority**: Must happen first. Consolidation cannot safely occur without knowing existing variations and resolving discrepancies with the maintainer.
+**Why this priority**: Must happen first to evaluate how the 4 separate helper files across 7 repos can be cleanly merged into one unified Header and one C++ file without dropping features.
 
-**Independent Test**: Generate a comprehensive diff report comparing helper implementations across `Gateway` and all `Nodes`, highlighting any divergent macros, pin definitions, or logic.
+**Independent Test**: Generate a diff matrix comparing helper implementations across `Gateway` and all `Nodes`, highlighting divergent macros, pin imports, and method access.
 
 **Acceptance Scenarios**:
 1. **Given** helper implementations across `LoRaNetGateway`, `LoraNodeButton`, `LoraNodeDualGateController`, `LoraNodeDualPIR`, `LoraNodeRepeater`, `LoraNodeVictron`, and `LoraNodeWaterTankLevel`, **When** compared, **Then** all variations are documented and presented to the maintainer for selection.
 
 ---
 
-### User Story 2 - Dedicated Private GitHub Repository & Shared Library Setup (Priority: P2)
-As a maintainer, I want the consolidated LoRa helper library stored in its own **new private GitHub repository** (e.g., `toogooda/LoRaFarmNetCore` or `toogooda/LoRaFarmNetLibrary`) structured as a PlatformIO-compatible library so that all gateway and node repos can cleanly reference or submodule it.
+### User Story 2 - Consolidated Single Header & Cpp Library (Priority: P2)
+As a developer, I want `Ra01S`, `LoRaHelper`, and `LoraMsg` combined and simplified into **one single Header file (`.h`) and one single Implementation file (`.cpp`)** with `#pragma once` include guards so that device firmware only needs to include one clean library unit.
 
-**Why this priority**: Centralizes code ownership in a dedicated repository, making updates, versioning, and linking across all node/gateway projects seamless.
+**Why this priority**: Directly solves Issue #1 Problem 2 (no pragma/cpp files for most helpers) by replacing 4 scattered files per project with 1 pair of `.h`/`.cpp` files.
 
-**Independent Test**: Verify that the new private GitHub repository is created, contains the merged headers (`Ra01S.h`, `LoRaHelper.h`, `LoraMsg.h`, `LoraMsg.cpp`) with `#pragma once` guards and `library.json`, and compiles cleanly.
+**Independent Test**: Verify that the combined `.h`/`.cpp` library compiles cleanly as a unified library unit.
 
 **Acceptance Scenarios**:
-1. **Given** approved merged sources, **When** pushed to a new private GitHub repository (e.g. `toogooda/LoRaFarmNetCore`), **Then** it is accessible to all device repos via PlatformIO dependency (`lib_deps`) or Git submodules.
-2. **Given** `#pragma once` guards and standard C++ declarations in the new library, **When** compiled, **Then** zero symbol duplication errors occur.
+1. **Given** the 4 separate files (`Ra01S.h`, `LoRaHelper.h`, `LoraMsg.h`, `LoraMsg.cpp`), **When** combined into a single header and single `.cpp` file with `#pragma once` include guards, **Then** all radio initialization, frame serialization, encryption, and helper methods function in a single library pair.
 
 ---
 
-### User Story 3 - Repository Migration & Compilation Verification (Priority: P3)
-As a developer, I want each node and gateway repository updated to reference the new private shared library repository so that local files are replaced and builds pass cleanly.
+### User Story 3 - Incremental Replacement & Compilation Verification (Priority: P3)
+As a developer, I want each node and gateway repository updated to replace the 4 legacy helper files with the new single-pair library so that local builds pass cleanly.
 
 **Why this priority**: Replaces duplicated local files across all 7 repos and verifies compilation compatibility.
 
-**Independent Test**: Execute `pio run` on each of the 7 device repositories after linking to the new shared library.
+**Independent Test**: Execute `pio run` on each of the 7 device repositories.
 
 **Acceptance Scenarios**:
-1. **Given** any device repository in `LoRaFarmNet`, **When** updated to link to the new shared library repo and `pio run` is executed, **Then** compilation succeeds with zero errors or warnings related to missing or duplicate LoRa headers.
+1. **Given** any device repository in `LoRaFarmNet`, **When** updated to use the consolidated single-pair library and `pio run` is executed, **Then** compilation succeeds with zero errors or warnings.
 
 ---
 
 ### User Story 4 - Device Hardware Testing & GitHub PR Delivery (Priority: P4)
-As a maintainer, I want individual GitHub Pull Requests opened for each updated device repository plus the root meta-repository and shared library repo after manual hardware verification so that each repo is cleanly versioned.
+As a maintainer, I want individual GitHub Pull Requests opened for each updated device repository plus the root meta-repository after manual hardware verification so that each repo is cleanly versioned.
 
 **Why this priority**: Respects the multi-repository structure of LoRaFarmNet while linking all changes to Issue #1.
 
@@ -63,19 +62,9 @@ As a maintainer, I want individual GitHub Pull Requests opened for each updated 
 ### Functional Requirements
 
 - **FR-001**: System MUST perform a complete pairwise diff audit across all 7 repositories before making source code edits.
-- **FR-002**: System MUST create a new **private GitHub repository** (e.g. `toogooda/LoRaFarmNetCore`) structured as a PlatformIO library to host the consolidated helpers.
-- **FR-003**: System MUST consolidate `Ra01S.h`, `LoRaHelper.h`, `LoraMsg.h`, and `LoraMsg.cpp` into the new shared library repository based on maintainer-approved variations.
-- **FR-004**: All shared headers MUST include proper `#pragma once` directives to prevent multi-definition compilation errors.
+- **FR-002**: System MUST combine `Ra01S.h`, `LoRaHelper.h`, `LoraMsg.h`, and `LoraMsg.cpp` into **one single Header file and one single C++ implementation file**.
+- **FR-003**: The consolidated header MUST include proper `#pragma once` directives to prevent multi-definition compilation errors.
+- **FR-004**: System MUST decouple hardware pinouts (`Pinout.h`) from the shared radio library.
 - **FR-005**: System MUST preserve binary frame protocol invariants (`MI` first pair, `CS` checksum last pair, 6-byte hardware addressing).
-- **FR-006**: Each node and gateway firmware MUST compile without errors using `pio run` after linking to the new shared library repository.
+- **FR-006**: Each node and gateway firmware MUST compile without errors using `pio run` after replacing legacy files with the single-pair library.
 - **FR-007**: All device repositories MUST be updated via individual Pull Requests linked to GitHub Issue #1.
-
----
-
-## Technical Feasibility & Audit Plan
-
-1. **Step 1 - Diff Audit**: Perform pairwise diff comparison of `Ra01S.h`, `LoRaHelper.h`, `LoraMsg.h`, `LoraMsg.cpp` across all 7 projects.
-2. **Step 2 - New Repository & Shared Library Creation**: Create new private GitHub repo (`toogooda/LoRaFarmNetCore`), assemble merged files, add `#pragma once`, and create PlatformIO library structure.
-3. **Step 3 - Incremental Replacement & Compilation**: Link each device repo to the new shared library repo and run `pio run`.
-4. **Step 4 - User Testing & Manual Verification**: Pause for user hardware testing per device.
-5. **Step 5 - Multi-Repo PR Delivery**: Open PRs for all affected repositories (including new library repo & meta-repo) and close Issue #1 upon final merge.
