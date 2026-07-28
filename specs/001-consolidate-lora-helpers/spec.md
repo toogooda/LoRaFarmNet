@@ -21,15 +21,16 @@ As a developer maintaining LoRaFarmNet, I want a complete diff audit of `Ra01S.h
 
 ---
 
-### User Story 2 - Consolidated Single Header & Cpp Library (Priority: P2)
-As a developer, I want `Ra01S`, `LoRaHelper`, and `LoraMsg` combined and simplified into **one single Header file (`.h`) and one single Implementation file (`.cpp`)** with `#pragma once` include guards so that device firmware only needs to include one clean library unit.
+### User Story 2 - Consolidated Single Header & Cpp Library with Hardware Pin Safety (Priority: P2)
+As a developer, I want `Ra01S`, `LoRaHelper`, and `LoraMsg` combined and simplified into **one single Header file (`.h`) and one single Implementation file (`.cpp`)** with `#pragma once` include guards while preserving hardware-specific `Pinout.h` pin mapping in each node/gateway.
 
-**Why this priority**: Directly solves Issue #1 Problem 2 (no pragma/cpp files for most helpers) by replacing 4 scattered files per project with 1 pair of `.h`/`.cpp` files.
+**Why this priority**: Solves Issue #1 Problem 2 (no pragma/cpp files for most helpers) by replacing 4 scattered files per project with 1 pair of `.h`/`.cpp` files without breaking target-specific hardware pins (Gateway ESP32 vs ATmega644PA Nodes).
 
-**Independent Test**: Verify that the combined `.h`/`.cpp` library compiles cleanly as a unified library unit.
+**Independent Test**: Verify that the combined `.h`/`.cpp` library compiles cleanly as a unified library unit and correctly accepts device-specific pins from each node's local `Pinout.h`.
 
 **Acceptance Scenarios**:
 1. **Given** the 4 separate files (`Ra01S.h`, `LoRaHelper.h`, `LoraMsg.h`, `LoraMsg.cpp`), **When** combined into a single header and single `.cpp` file with `#pragma once` include guards, **Then** all radio initialization, frame serialization, encryption, and helper methods function in a single library pair.
+2. **Given** device-specific hardware pin definitions in local `Pinout.h` (e.g. `LCSS`, `LRST`, `LBSY`, `LPWR`), **When** compiled for any node/gateway, **Then** device-specific pin mappings remain intact.
 
 ---
 
@@ -64,7 +65,7 @@ As a maintainer, I want individual GitHub Pull Requests opened for each updated 
 - **FR-001**: System MUST perform a complete pairwise diff audit across all 7 repositories before making source code edits.
 - **FR-002**: System MUST combine `Ra01S.h`, `LoRaHelper.h`, `LoraMsg.h`, and `LoraMsg.cpp` into **one single Header file and one single C++ implementation file**.
 - **FR-003**: The consolidated header MUST include proper `#pragma once` directives to prevent multi-definition compilation errors.
-- **FR-004**: System MUST decouple hardware pinouts (`Pinout.h`) from the shared radio library.
+- **FR-004**: System MUST preserve device-specific hardware pin definitions in each repo's local `Pinout.h` (e.g. ESP32 Gateway vs ATmega644PA nodes).
 - **FR-005**: System MUST preserve binary frame protocol invariants (`MI` first pair, `CS` checksum last pair, 6-byte hardware addressing).
 - **FR-006**: Each node and gateway firmware MUST compile without errors using `pio run` after replacing legacy files with the single-pair library.
 - **FR-007**: All device repositories MUST be updated via individual Pull Requests linked to GitHub Issue #1.
