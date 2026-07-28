@@ -1,4 +1,4 @@
-# Tasks: Consolidate LoRa Helpers into Single Header & Cpp Library
+# Tasks: Consolidate LoRa Helpers into Shared Library Repository
 
 **Input**: Design documents from `specs/001-consolidate-lora-helpers/`  
 **Prerequisites**: `plan.md` (required), `spec.md` (required), `research.md` (required)  
@@ -11,10 +11,6 @@
 
 ## Phase 1: User Story 1 - Pairwise Diff Audit & Selection Approval (Priority: P1) 🎯 MVP
 
-**Goal**: Document all variations in `Ra01S.h`, `LoRaHelper.h`, `LoraMsg.h`, `LoraMsg.cpp` across 7 repos and confirm merged signatures with maintainer.
-
-**Independent Test**: Complete diff matrix verifying every macro, method signature, and pin import divergence.
-
 - [x] T001 [US1] Complete pairwise diff audit of `Ra01S.h` across Gateway and 6 Node repos.
 - [x] T002 [US1] Complete pairwise diff audit of `LoRaHelper.h` across Gateway and 6 Node repos.
 - [x] T003 [US1] Complete pairwise diff audit of `LoraMsg.h` & `LoraMsg.cpp` across Gateway and 6 Node repos.
@@ -24,45 +20,48 @@
 
 ---
 
-## Phase 2: User Story 2 - Consolidated Single Header & Cpp Library Assembly (Priority: P2)
+## Phase 2: User Story 2 - Dedicated Shared Library Repository Assembly (Priority: P2)
 
-**Goal**: Create a single `LoRaHelper.h` and `LoRaHelper.cpp` pair with `#pragma once` guards while preserving local `Pinout.h` hardware pin mapping.
+**Goal**: Create standalone library repo `Libraries/LoRaNetLibrary` with `library.json`, `src/LoRaHelper.h`, `src/LoRaHelper.cpp`, and push `v1.0.1` release to GitHub (`toogooda/LoRaNetLibrary`).
 
-**Independent Test**: Consolidated `.h`/`.cpp` files compile as a unified library unit.
+**Independent Test**: Library unit structure is valid and published to GitHub.
 
-- [ ] T005 [US2] Assemble unified `LoRaHelper.h` with `#pragma once`, `Ra01S` register definitions, default RF parameters, `PortValue` struct, `SX126x` class, and `LoraMsg` class.
-- [ ] T006 [US2] Assemble unified `LoRaHelper.cpp` containing member implementations for `SX126x` transceiver methods and `LoraMsg` message serialization/encryption/CRC methods.
-- [ ] T007 [US2] Verify `LoRaHelper.h` includes local `"Pinout.h"` to inherit target-specific hardware pins (`LCSS`, `LRST`, `LBSY`, `LPWR`, etc.).
+- [x] T005 [US2] Create directory structure `Libraries/LoRaNetLibrary/src`.
+- [x] T006 [US2] Create `library.json` manifest with metadata for Arduino framework, `atmelavr` and `espressif32` platforms.
+- [x] T007 [US2] Create unified `Libraries/LoRaNetLibrary/src/LoRaHelper.h` with `#pragma once`, `Ra01S` register definitions, default RF parameters, `PortValue` struct, `SX126x` class, `LoraMsg` class, and `extern SX126x lora;` declaration.
+- [x] T008 [US2] Create unified `Libraries/LoRaNetLibrary/src/LoRaHelper.cpp` containing member implementations for `SX126x` transceiver methods and `LoraMsg` message serialization/encryption/CRC methods.
+- [x] T009 [US2] Add `README.md` to `Libraries/LoRaNetLibrary` with usage documentation.
 
-**Checkpoint**: Unified library pair complete and ready for repository migration.
+**Checkpoint**: Standalone `LoRaNetLibrary` repository published to GitHub (`toogooda/LoRaNetLibrary.git#v1.0.1`).
 
 ---
 
-## Phase 3: User Story 3 - Repository Migration & Compilation Verification (Priority: P3)
+## Phase 3: User Story 3 - Local Code Cleanup & platformio.ini Dependency Integration (Priority: P3)
 
-**Goal**: Replace 4 legacy helper files in each of the 7 repositories with the unified `LoRaHelper.h`/`LoRaHelper.cpp` pair and verify clean builds with `pio run`.
+**Goal**: Remove duplicate local helper files from `src/` of all 7 device repos, add `https://github.com/toogooda/LoRaNetLibrary.git#v1.0.1` to `lib_deps` in `platformio.ini`, and verify clean `pio run` builds.
 
 **Independent Test**: `pio run` executes cleanly with zero errors on all 7 device projects.
 
-- [ ] T008 [P] [US3] Replace legacy files in `Gateway/LoRaNetGateway/` and verify with `pio run`.
-- [ ] T009 [P] [US3] Replace legacy files in `Nodes/LoraNodeButton/` and verify with `pio run`.
-- [ ] T010 [P] [US3] Replace legacy files in `Nodes/LoraNodeDualGateController/` and verify with `pio run`.
-- [ ] T011 [P] [US3] Replace legacy files in `Nodes/LoraNodeDualPIR/` and verify with `pio run`.
-- [ ] T012 [P] [US3] Replace legacy files in `Nodes/LoraNodeRepeater/` and verify with `pio run`.
-- [ ] T013 [P] [US3] Replace legacy files in `Nodes/LoraNodeVictron/` and verify with `pio run`.
-- [ ] T014 [P] [US3] Replace legacy files in `Nodes/LoraNodeWaterTankLevel/` and verify with `pio run`.
+- [x] T010 [P] [US3] Remove local `LoRaHelper.h`/`LoRaHelper.cpp` from `Gateway/LoRaNetGateway/src/`, add `lib_deps` entry in `platformio.ini`, and verify with `pio run`.
+- [x] T011 [P] [US3] Remove local `LoRaHelper.h`/`LoRaHelper.cpp` from `Nodes/LoraNodeButton/src/`, add `lib_deps` entry in `platformio.ini`, and verify with `pio run`.
+- [x] T012 [P] [US3] Remove local `LoRaHelper.h`/`LoRaHelper.cpp` from `Nodes/LoraNodeDualGateController/src/`, add `lib_deps` entry in `platformio.ini`, and verify with `pio run`.
+- [x] T013 [P] [US3] Remove local `LoRaHelper.h`/`LoRaHelper.cpp` from `Nodes/LoraNodeDualPIR/src/`, add `lib_deps` entry in `platformio.ini`, and verify with `pio run`.
+- [x] T014 [P] [US3] Remove local `LoRaHelper.h`/`LoRaHelper.cpp` from `Nodes/LoraNodeRepeater/src/`, add `lib_deps` entry in `platformio.ini`, and verify with `pio run`.
+- [x] T015 [P] [US3] Remove local `LoRaHelper.h`/`LoRaHelper.cpp` from `Nodes/LoraNodeVictron/src/`, add `lib_deps` entry in `platformio.ini`, and verify with `pio run`.
+- [x] T016 [P] [US3] Remove local `LoRaHelper.h`/`LoRaHelper.cpp` from `Nodes/LoraNodeWaterTankLevel/src/`, add `lib_deps` entry in `platformio.ini`, and verify with `pio run`.
 
-**Checkpoint**: All 7 repositories compile cleanly using the consolidated library pair.
+**Checkpoint**: All 7 repositories compile cleanly using `LoRaNetLibrary` from `platformio.ini`.
 
 ---
 
 ## Phase 4: User Story 4 - Manual Hardware Verification & GitHub PR Delivery (Priority: P4)
 
-**Goal**: Perform manual hardware testing, push feature branches, and submit GitHub Pull Requests.
+**Goal**: Perform manual hardware testing, push feature branches (including new library repo), and submit GitHub Pull Requests.
 
-**Independent Test**: Dedicated PR opened for each modified repository and linked to Issue #1.
+**Independent Test**: Dedicated PR opened for `LoRaNetLibrary` and each modified device repository linked to Issue #1.
 
-- [ ] T015 [US4] Pause for manual hardware testing across physical gateway and field nodes.
-- [ ] T016 [US4] Ask user permission to push feature branches to remote repositories.
-- [ ] T017 [US4] Open individual GitHub Pull Requests for all modified device repos and meta-repo.
-- [ ] T018 [US4] Update and close GitHub Issue #1 upon PR approval.
+- [ ] T017 [US4] Pause for manual hardware testing across physical gateway and field nodes.
+- [ ] T018 [US4] Ask user permission to initialize git repo for `LoRaNetLibrary` and push feature branches to remote repositories.
+- [ ] T019 [US4] Open individual GitHub Pull Requests for `LoRaNetLibrary`, all modified device repos, and meta-repo.
+- [ ] T020 [US4] Update and close GitHub Issue #1 upon PR approval.
+
