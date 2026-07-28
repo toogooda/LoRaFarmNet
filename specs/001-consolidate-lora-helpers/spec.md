@@ -2,7 +2,7 @@
 
 **Feature Branch**: `001-consolidate-lora-helpers`  
 **Created**: 2026-07-28  
-**Status**: Draft  
+**Status**: Complete  
 **Input**: GitHub Issue #1: "Consolidate LoRa helpers to a new shared library for all LoRaFarmNet Devices"
 
 ---

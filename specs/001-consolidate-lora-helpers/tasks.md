@@ -60,8 +60,8 @@
 
 **Independent Test**: Dedicated PR opened for `LoRaNetLibrary` and each modified device repository linked to Issue #1.
 
-- [ ] T017 [US4] Pause for manual hardware testing across physical gateway and field nodes.
-- [ ] T018 [US4] Ask user permission to initialize git repo for `LoRaNetLibrary` and push feature branches to remote repositories.
-- [ ] T019 [US4] Open individual GitHub Pull Requests for `LoRaNetLibrary`, all modified device repos, and meta-repo.
-- [ ] T020 [US4] Update and close GitHub Issue #1 upon PR approval.
+- [x] T017 [US4] Pause for manual hardware testing across physical gateway and field nodes.
+- [x] T018 [US4] Ask user permission to initialize git repo for `LoRaNetLibrary` and push feature branches to remote repositories.
+- [x] T019 [US4] Open individual GitHub Pull Requests for `LoRaNetLibrary`, all modified device repos, and meta-repo.
+- [x] T020 [US4] Update and close GitHub Issue #1 upon PR approval.
 
