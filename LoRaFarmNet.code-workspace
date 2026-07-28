@@ -1,0 +1,37 @@
+{
+	"folders": [
+		{
+			"name": "LoRaFarmNet (Root)",
+			"path": "."
+		},
+		{
+			"name": "Gateway",
+			"path": "Gateway/LoRaNetGateway"
+		},
+		{
+			"name": "LoraNodeButton",
+			"path": "Nodes/LoraNodeButton"
+		},
+		{
+			"name": "LoraNodeDualGateController",
+			"path": "Nodes/LoraNodeDualGateController"
+		},
+		{
+			"name": "LoraNodeDualPIR",
+			"path": "Nodes/LoraNodeDualPIR"
+		},
+		{
+			"name": "LoraNodeRepeater",
+			"path": "Nodes/LoraNodeRepeater"
+		},
+		{
+			"name": "LoraNodeVictron",
+			"path": "Nodes/LoraNodeVictron"
+		},
+		{
+			"name": "LoraNodeWaterTankLevel",
+			"path": "Nodes/LoraNodeWaterTankLevel"
+		}
+	],
+	"settings": {}
+}

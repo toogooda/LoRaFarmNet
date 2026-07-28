@@ -22,8 +22,6 @@
 
 ### IV. Core Shared Libraries
 * All transceivers and power logic must build upon standardized core libraries:
-  * `Ra01S.h`: Transceiver driver (SX126x/Ra-01S).
-  * `LoRaHelper.h`: State machine & transmission retries.
   * `LoraMsg.h`: Binary serialization, parsing, encryption, CRC.
   * `nano64DeepSleep.h`: Hardware sleep timers & wake interrupts.
 
@@ -43,8 +41,8 @@
 
 ## Development Workflow & Quality Gates
 
-1. **Task Identification & Feature Branching**: Obtain user confirmation prior to creating feature branches.
-2. **Conductor Spec & Plan**: Maintain track documentation in `conductor/tracks/`.
+1. **Task Identification & Feature Branching**: All speckit work should be in a feature branch named similar to its name in specs folder.
+2. Very Important! Never refactor or rewriter anything unless asked to, when moving or merging code also copy exactly the code no recreation.
 3. **Build & Manual Verification**: Execute `pio run` after significant changes and pause for hardware verification.
 4. **Pull Request & Cleanup**: Push branch, create PR for user review. Upon merge, pull master and remove local/remote branches.
 
