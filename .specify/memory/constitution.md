@@ -29,6 +29,7 @@
 * **Compilation Gate**: All code modifications must pass local build verification (`pio run`) before completion.
 * **Pull Request Policy**: Changes are delivered exclusively via feature branches and GitHub Pull Requests. PRs must be approved and merged manually by the user; local merging is prohibited.
 * **Track Documentation**: Tasks follow Conductor track standards (`spec.md`, `plan.md`, metadata).
+* **GitHub Issue Lifecycle**: If a task or spec originated from a GitHub issue, closing the associated issue MUST be explicitly included as the final task in the implementation plan (`plan.md`) and executed upon task completion.
 
 ---
 
@@ -45,6 +46,7 @@
 2. Very Important! Never refactor or rewriter anything unless asked to, when moving or merging code also copy exactly the code no recreation.
 3. **Build & Manual Verification**: Execute `pio run` after significant changes and pause for hardware verification.
 4. **Pull Request & Cleanup**: Push branch, create PR for user review. Upon merge, pull master and remove local/remote branches.
+5. **Issue Resolution**: If a GitHub issue was used to open a spec, ensure closing the GitHub issue is scheduled as the final task in `plan.md` and closed upon completion.
 
 ---
 
@@ -52,4 +54,4 @@
 
 * This Constitution supersedes informal guidelines.
 * Amendments require documented justification, version increment, and synchronization across dependent templates.
-* **Version**: 1.0.0 | **Ratified**: 2026-07-28 | **Last Amended**: 2026-07-28
+* **Version**: 1.1.0 | **Ratified**: 2026-07-28 | **Last Amended**: 2026-07-29
