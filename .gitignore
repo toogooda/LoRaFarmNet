@@ -1,0 +1,19 @@
+# Root .gitignore for LoRaFarmNet Meta-Repository
+# Tracks global agent rules (.agents/), Spec Kit history (.specify/, .github/, specs/), and workspace configurations.
+
+# Nested git repositories (managed independently)
+Gateway/
+Nodes/
+
+# OS / Environment artifacts
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+*.swp
+
+# Local developer / IDE caches
+.pio/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
