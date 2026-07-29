@@ -51,6 +51,6 @@
 
 ## Phase 6: User Story 5 - Pull Requests & GitHub Issue Closure (Priority: P5)
 
-- [ ] T021 [US5] Initialize git repository in `Libraries/nano64DeepSleep` and create initial commit
-- [ ] T022 [US5] Push feature branches and create Pull Requests for `Libraries/nano64DeepSleep` and all 5 sleeping node repositories
-- [ ] T023 [US5] Close GitHub Issue #3 on `toogooda/LoRaFarmNet` as the final plan task upon PR merge
+- [x] T021 [US5] Initialize git repository in `Libraries/nano64DeepSleep` and create initial commit
+- [x] T022 [US5] Push feature branches and create Pull Requests for `Libraries/nano64DeepSleep` and all 5 sleeping node repositories
+- [x] T023 [US5] Close GitHub Issue #3 on `toogooda/LoRaFarmNet` as the final plan task upon PR merge
