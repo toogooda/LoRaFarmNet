@@ -70,5 +70,6 @@
 
 **Goal**: Finalize feature branch, create PR, and close GitHub Issue #6.
 
-- [ ] T017 Ask user permission to push branch `006-ota-using-github` and create Pull Request
-- [ ] T018 Update and close GitHub Issue #6 upon PR approval/merge
+- [x] T017 Ask user permission to push branch `006-ota-using-github` and create Pull Request
+- [x] T018 Update and close GitHub Issue #6 upon PR approval/merge
+
