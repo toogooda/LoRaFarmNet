@@ -3,7 +3,7 @@
 <dtid>0</dtid>
 <dtcat>0</dtcat>
 <dthw>1.0</dthw>
-<minfw>0</minfw>
+<minfw>1.4</minfw>
 </header>
 <sensorvalue>
 <port>VB</port>
