@@ -1,0 +1,9 @@
+1	Water Tank Level	f773	3	Full	
+2	Victron Smart Solar	f0e7	2	Full	
+3	Remote PIR	f06e	0	Mini	
+4	Gate Controller	f52b	4	Mini	
+5	Electric Fence Tester	f0e7	5	Mini	
+6	SOS device	f0e7	6	Mini	
+7	Repeater	f012	9	Mini	
+8	Water Flow Controller	f043	8	Mini	
+9	Remote Door	f52a	2	Mini
