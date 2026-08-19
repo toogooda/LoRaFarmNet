@@ -1,0 +1,82 @@
+[
+  {
+    "id": 0,
+    "name": "Custom",
+    "icon": "3f",
+    "order": 0,
+    "viewType": "Mini",
+    "isMini": true
+  },
+  {
+    "id": 1,
+    "name": "Water Tank Level",
+    "icon": "f773",
+    "order": 3,
+    "viewType": "Full",
+    "isMini": false
+  },
+  {
+    "id": 2,
+    "name": "Victron Smart Solar",
+    "icon": "f0e7",
+    "order": 2,
+    "viewType": "Full",
+    "isMini": false
+  },
+  {
+    "id": 3,
+    "name": "Remote PIR",
+    "icon": "f06e",
+    "order": 0,
+    "viewType": "Mini",
+    "isMini": true
+  },
+  {
+    "id": 4,
+    "name": "Gate Controller",
+    "icon": "f52b",
+    "order": 4,
+    "viewType": "Mini",
+    "isMini": true
+  },
+  {
+    "id": 5,
+    "name": "Electric Fence Tester",
+    "icon": "f0e7",
+    "order": 5,
+    "viewType": "Mini",
+    "isMini": true
+  },
+  {
+    "id": 6,
+    "name": "SOS device",
+    "icon": "f0e7",
+    "order": 6,
+    "viewType": "Mini",
+    "isMini": true
+  },
+  {
+    "id": 7,
+    "name": "Repeater",
+    "icon": "f012",
+    "order": 9,
+    "viewType": "Mini",
+    "isMini": true
+  },
+  {
+    "id": 8,
+    "name": "Water Flow Controller",
+    "icon": "f043",
+    "order": 8,
+    "viewType": "Mini",
+    "isMini": true
+  },
+  {
+    "id": 9,
+    "name": "Remote Door",
+    "icon": "f52a",
+    "order": 2,
+    "viewType": "Mini",
+    "isMini": true
+  }
+]
