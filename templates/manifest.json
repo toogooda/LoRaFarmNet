@@ -1,11 +1,11 @@
 [
   {
     "dtid": 0,
-    "name": "Test Device v1.0",
+    "name": "Custom Device v1.0",
     "hw": 1.0,
-    "minfw": "1.4",
+    "minfw": "0",
     "catid": 0,
-    "filename": "test_dt0_v1_0.typ",
+    "filename": "Custom.typ",
     "enabled": true
   },
   {
