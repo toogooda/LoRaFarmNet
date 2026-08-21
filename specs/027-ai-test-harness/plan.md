@@ -184,26 +184,33 @@ The Gateway data model contains multi-level **1-to-many linked list relationship
    - `--run-suite`: Execute full end-to-end regression test suite.
 
 ### Component 4: AI Workflow Documentation & Rules
-1. Create `.agents/rules/ai_testing_workflow.md` documenting:
-   - Discovery of Gateway IP and serial port (`platformio.ini`).
-   - Standard automated verification procedure using `AITestHarness`.
-   - Tear-down and snapshot restore protocol.
-2. Update `.specify/memory/constitution.md` with the autonomous testing gate.
+1. Create `.agents/rules/ai_testing_workflow.md` documenting the autonomous Gateway test loop:
+   - **Upload Firmware**: Execute `pio run -t upload` using the configured `upload_port` from `platformio.ini`.
+   - **Serial Monitor IP Discovery**: Connect to the serial port (`upload_port` / `monitor_port` at 115200 baud) and monitor boot output until `IP Address:<ip>` is printed (e.g., `IP Address:192.168.68.104`).
+   - **Settling Delay**: Wait 3 additional seconds after IP announcement to ensure webserver initialization, mDNS, and internal tasks are fully ready and listening.
+   - **Automated Test Execution**: Call `POST /settings/testmode` &rarr; `POST /api/test/snapshot` &rarr; execute test injections & assertions via `test_gateway_harness.py` &rarr; `POST /api/test/restore`.
+2. Update `.specify/memory/constitution.md` with the autonomous testing gate and serial IP discovery protocol.
 
 ---
 
 ## Phase 2: Verification Plan
 
-### Automated Regression Verification:
-1. `pio run` build compilation check in `Gateway/LoRaNetGateway`.
-2. Execute `test_gateway_harness.py` against live Gateway:
-   - Validate `403 Forbidden` when Test Mode is disabled.
-   - Enable Test Mode and verify `200 OK`.
-   - Snapshot network baseline.
-   - Inject simulated device `FC0FE71463C5` (`DT=0`, `IV=325`, `SM=15`, `MI=14`).
-   - Query `GET /api/test/device?id=fc0fe71463c5` and assert `IV == 325`, `DT == 0`.
-   - Apply template and verify entities created.
-   - Restore snapshot and verify device is purged.
+### Automated Hardware-in-the-Loop Test Loop:
+1. **Compilation Check**: Run local build verification (`pio run`) in `Gateway/LoRaNetGateway`.
+2. **Flash & Serial IP Discovery**:
+   - Upload firmware to connected ESP32 via `pio run -t upload`.
+   - Monitor serial output at 115200 baud until the advertised IP address appears (`IP Address:<ip_address>`).
+   - Wait 3 seconds for network settling.
+3. **Execute Automated Test Suite (`test_gateway_harness.py`)**:
+   - **Security Check**: Assert `403 Forbidden` on `/api/test/status` while Test Mode is OFF.
+   - **Enable Test Mode**: `POST /settings/testmode?enable=1` and verify `200 OK`.
+   - **Snapshot Baseline**: `POST /api/test/snapshot`.
+   - **Synthetic Packet Ingestion**:
+     - Inject `FC0FE71463C5` (`DT=0`, `IV=325`, `SM=15`, `MI=14`, `RSSI=-110`, `SNR=-4`).
+     - Query `GET /api/test/device?id=fc0fe71463c5` and assert all sensor values, computed values, and entities match expectations.
+   - **Template & UI Flow**: Trigger `/device?deviceid=fc0fe71463c5&setup=1` and verify entity translations/highlights are created in memory.
+   - **Clean Teardown**: `POST /api/test/restore` and verify device state resets to baseline.
+   - **Disable Test Mode**: `POST /settings/testmode?enable=0`.
 
 ### Manual Hardware Sanity:
 - Verify normal LoRa reception from physical field nodes is completely unaffected.
