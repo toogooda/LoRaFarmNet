@@ -54,3 +54,8 @@ All radio and power logic must build upon these shared headers:
 * `LoRaHelper.h`: Transmission, reception state machine, and retries.
 * `LoraMsg.h`: Binary serialization, parsing, encryption, and CRC validation.
 * `nano64DeepSleep.h`: Hardware sleep timers and wake interrupts.
+
+---
+
+## Subsystem & Gateway Testing Workflows
+* **Gateway Autonomous Testing & Hardware Verification Workflow**: See [`Gateway/LoRaNetGateway/.agent/rules/ai_testing_workflow.md`](file:///c:/Users/USER/Projects/LoRaFarmNet/Gateway/LoRaNetGateway/.agent/rules/ai_testing_workflow.md) for full test harness, dynamic serial IP discovery, and dual-surface verification rules.
