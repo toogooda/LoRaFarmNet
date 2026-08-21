@@ -44,7 +44,7 @@
 
 1. **Task Identification & Feature Branching**: All speckit work should be in a feature branch named similar to its name in specs folder.
 2. Very Important! Never refactor or rewriter anything unless asked to, when moving or merging code also copy exactly the code no recreation.
-3. **Build & Manual Verification**: Execute `pio run` after significant changes and pause for hardware verification.
+3. **Build & Automated Verification**: Execute `pio run` after code changes. For Gateway features, flash firmware (`pio run -t upload`), monitor serial port (`platformio.ini`) at 115200 baud for `IP Address:<ip>`, wait 3 seconds for settling, and run automated `AITestHarness` tests before pausing for manual human testing.
 4. **Pull Request & Cleanup**: Push branch, create PR for user review. Upon merge, pull master and remove local/remote branches.
 5. **Issue Resolution**: If a GitHub issue was used to open a spec, ensure closing the GitHub issue is scheduled as the final task in `plan.md` and closed upon completion.
 
@@ -54,4 +54,4 @@
 
 * This Constitution supersedes informal guidelines.
 * Amendments require documented justification, version increment, and synchronization across dependent templates.
-* **Version**: 1.1.0 | **Ratified**: 2026-07-28 | **Last Amended**: 2026-07-29
+* **Version**: 1.2.0 | **Ratified**: 2026-07-28 | **Last Amended**: 2026-08-21
