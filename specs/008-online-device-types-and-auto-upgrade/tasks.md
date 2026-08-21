@@ -65,7 +65,7 @@
 **Goal**: Build firmware, conduct manual hardware test with `DT = 0`, bump version, and create Pull Request.
 
 - [x] T017 Run local PlatformIO build verification (`pio run`) in `Gateway/LoRaNetGateway`.
-- [ ] T018 Conduct manual verification using physical node transmitting `DT = 0`.
-- [ ] T019 Bump gateway firmware version to `v1.1.0` in `src/Version.h`.
-- [ ] T020 Push feature branch `008-online-device-types-and-auto-upgrade` and create Pull Request on `toogooda/LoRaNetGateway`.
-- [ ] T021 Close GitHub Issue #8 upon user PR approval and merge.
+- [x] T018 Conduct manual verification using physical node transmitting `DT = 0`.
+- [x] T019 Bump gateway firmware version to `v1.4.0` in `src/Version.h`.
+- [x] T020 Push feature branch `008-online-device-types-and-auto-upgrade` and create Pull Request on `toogooda/LoRaNetGateway`.
+- [x] T021 Close GitHub Issue #8 upon user PR approval and merge.
