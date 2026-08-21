@@ -90,12 +90,51 @@ Gateway/LoRaNetGateway/
   This triggers identical execution: sensor values update, translations execute, highlight states compute, and new devices are registered.
 
 ### 2. Full Device State Serialization (`GET /api/test/device?id=...`)
-- Uses `ArduinoJson` (v7) to serialize:
-  - Device: `id`, `name`, `type`, `routerId`, `hasData`, `lastSeenSeconds`
-  - SensorValues: `port`, `rawVal`, `timestamp`
-  - Entities: `name`, `order`, `icon`, `uom`, `showStatus`, `mqttCat`, `sendAveDelta`
-  - Translations: `type`, `name`, `valFrom`, `valTo`, `visible`, `changeable`
-  - Highlights: `type`, `name`, `icon`, `color`, `valFrom`, `valTo`
+The Gateway data model contains multi-level **1-to-many linked list relationships**:
+- **Device &rarr; Many `SensorValue` objects** (`svHead`, traversed via `sv->next`)
+  - **SensorValue &rarr; Many `Entity` objects** (`_head`, traversed via `e->next`)
+    - **Entity &rarr; Many `Translation` objects** (`_transHead`, traversed via `t->next`)
+    - **Entity &rarr; Many `HighlightRule` objects** (`_hlHead`, traversed via `hl->next`)
+  - **SensorValue &rarr; Many `EndPoint` objects** (`_headEndPoint`, traversed via `ep->next`)
+  - **SensorValue &rarr; Many `PipeLine` objects** (`_headPipeLine`, traversed via `pl->next`)
+- **Device &rarr; Many `RoutedNode` objects** (`routedNodesHead`, traversed via `rn->next`)
+
+`GET /api/test/device` recursively traverses every linked list and serializes the complete tree using `ArduinoJson` (v7):
+```json
+{
+  "id": "fc0fe71463c5",
+  "name": "Custom 1",
+  "type": "Configured",
+  "hasData": true,
+  "lastSeenSecondsAgo": 12,
+  "routerId": 0,
+  "sensorValues": [
+    {
+      "port": "IV",
+      "value": 325.0,
+      "entities": [
+        {
+          "id": 1,
+          "name": "Battery Voltage",
+          "order": 1,
+          "icon": "f240",
+          "uom": "V",
+          "computedValue": 3.25,
+          "translations": [
+            { "id": 1, "type": "Scale", "name": "Div100", "valFrom": 0.01, "valTo": 0.0, "visible": true, "changeable": true }
+          ],
+          "highlightRules": [
+            { "id": 1, "name": "Low Batt", "test": "LessThan", "valFrom": 3.0, "valTo": 0.0, "highlight": "Yellow" }
+          ]
+        }
+      ],
+      "endPoints": [],
+      "pipeLines": []
+    }
+  ],
+  "routedNodes": []
+}
+```
 
 ### 3. Snapshot & Restore Cleanup Mechanism
 - `POST /api/test/snapshot`: Atomically copies `/lfm/data/network.dat` to `/lfm/data/test_snapshot.bak`.
