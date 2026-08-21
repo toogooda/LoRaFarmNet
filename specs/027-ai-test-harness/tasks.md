@@ -70,6 +70,6 @@
 **Goal**: Compile gateway firmware, run automated regression tests via test harness, submit Pull Request, and close Issue #27.
 
 - [x] T019 Run local build verification (`pio run`) in `Gateway/LoRaNetGateway`.
-- [ ] T020 Flash firmware (`pio run -t upload`), monitor serial port from `platformio.ini` at 115200 baud until `IP Address:<ip>` is captured, wait 3 seconds, then execute automated regression test suite using `test_gateway_harness.py` against live Gateway to verify end-to-end injection, query, and cleanup.
+- [x] T020 Flash firmware (`pio run -t upload`), monitor serial port from `platformio.ini` at 115200 baud until `IP Address:<ip>` is captured, wait 3 seconds, then execute automated regression test suite using `test_gateway_harness.py` against live Gateway to verify end-to-end injection, query, and cleanup.
 - [ ] T021 Push feature branch `027-ai-test-harness` and create Pull Requests on `toogooda/LoRaNetGateway` and `toogooda/LoRaFarmNet`.
 - [ ] T022 Post final completion report to GitHub Issue #27 and close the issue upon PR merge.
