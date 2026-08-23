@@ -9,9 +9,9 @@
 
 **Purpose**: Establish SSE (`/api/pair/events`), navbar links, and base routing.
 
-- [ ] T001 Add "Add Device" link (`/adddevice`) to navbar in `Gateway/LoRaNetGateway/src/WebHelper.h` (`sendPageHeader`).
-- [ ] T002 Attach `AsyncEventSource pairEvents("/api/pair/events")` to web server in `Gateway/LoRaNetGateway/src/main.cpp` and `Gateway/LoRaNetGateway/src/WebHelper.h`.
-- [ ] T003 Implement `GET /api/pair/list` in `Gateway/LoRaNetGateway/src/WebHelper.h` returning in-memory unconfigured devices (`New` and `Ignore`) with 24-hour timestamp categorization.
+- [x] T001 Add "Add Device" link (`/adddevice`) to navbar in `Gateway/LoRaNetGateway/src/WebHelper.h` (`sendPageHeader`).
+- [x] T002 Attach `AsyncEventSource pairEvents("/api/pair/events")` to web server in `Gateway/LoRaNetGateway/src/main.cpp` and `Gateway/LoRaNetGateway/src/WebHelper.h`.
+- [x] T003 Implement `GET /api/pair/list` in `Gateway/LoRaNetGateway/src/WebHelper.h` returning in-memory unconfigured devices (`New` and `Ignore`) with 24-hour timestamp categorization.
 
 ---
 
@@ -19,10 +19,10 @@
 
 **Goal**: As unconfigured LoRa packets arrive at Gateway, broadcast SSE `new_device` events and dynamically render full device cards on `/adddevice` without page reloads.
 
-- [ ] T004 Implement `new_device` SSE broadcast in `FarmNetwork::processNewMessage()` in `Gateway/LoRaNetGateway/src/FarmNetwork.cpp` when `d->getType() == DeviceType::New`.
-- [ ] T005 Create `sendAddDevicePage()` in `Gateway/LoRaNetGateway/src/WebHelper.h` rendering the radar listening animation and card stream container.
-- [ ] T006 Implement JavaScript client on `/adddevice` connecting to `EventSource('/api/pair/events')` to insert/update full device cards dynamically on incoming `new_device` events.
-- [ ] T007 Add "Configure / Setup" and "Ignore" action buttons to dynamically rendered device cards.
+- [x] T004 Implement `new_device` SSE broadcast in `FarmNetwork::processNewMessage()` in `Gateway/LoRaNetGateway/src/FarmNetwork.cpp` when `d->getType() == DeviceType::New`.
+- [x] T005 Create `sendAddDevicePage()` in `Gateway/LoRaNetGateway/src/WebHelper.h` rendering the radar listening animation and card stream container.
+- [x] T006 Implement JavaScript client on `/adddevice` connecting to `EventSource('/api/pair/events')` to insert/update full device cards dynamically on incoming `new_device` events.
+- [x] T007 Add "Configure / Setup" and "Ignore" action buttons to dynamically rendered device cards.
 
 ---
 
@@ -30,11 +30,11 @@
 
 **Goal**: Display unconfigured devices heard in the last 24h as "Older Unsetup Devices" with top filter toggles.
 
-- [ ] T008 Implement top filter toggles on `/adddevice`:
+- [x] T008 Implement top filter toggles on `/adddevice`:
   - `Toggle Older Unsetup Devices` (Default: OFF)
   - `Toggle Ignored Unsetup Devices` (Default: OFF)
-- [ ] T009 Filter out all configured devices (`DeviceType::Configured`) from the discovery list.
-- [ ] T010 Implement client-side filtering logic showing/hiding older 24h devices and ignored devices upon toggle click.
+- [x] T009 Filter out all configured devices (`DeviceType::Configured`) from the discovery list.
+- [x] T010 Implement client-side filtering logic showing/hiding older 24h devices and ignored devices upon toggle click.
 
 ---
 
@@ -42,14 +42,14 @@
 
 **Goal**: Query Routers for candidate devices from their `PotentialList`, aggregate multi-path RSSI, and highlight Safest Route and packet countdowns.
 
-- [ ] T011 Render individual `Query Router [Router Name]` buttons for all registered routers on `/adddevice`.
-- [ ] T012 Implement `POST /api/pair/query_router?routerId=<id>` in `Gateway/LoRaNetGateway/src/WebHelper.h` transmitting `QN: 1` command to target router.
-- [ ] T013 Parse incoming `QN` response stream in `FarmNetwork::processNewMessage()` (`M1..M3`, `DT`, `RS`, `SM`, `MM`, `QN: 255`) and broadcast `router_device` and `router_query_done` events.
-- [ ] T014 Implement multi-route evaluation on `/adddevice`:
+- [x] T011 Render individual `Query Router [Router Name]` buttons for all registered routers on `/adddevice`.
+- [x] T012 Implement `POST /api/pair/query_router?routerId=<id>` in `Gateway/LoRaNetGateway/src/WebHelper.h` transmitting `QN: 1` command to target router.
+- [x] T013 Parse incoming `QN` response stream in `FarmNetwork::processNewMessage()` (`M1..M3`, `DT`, `RS`, `SM`, `MM`, `QN: 255`) and broadcast `router_device` and `router_query_done` events.
+- [x] T014 Implement multi-route evaluation on `/adddevice`:
   - Aggregate paths heard across Direct Gateway and Routers for each unique MAC.
   - Apply **Green "Safest Route"** badge to the path with the strongest RSSI.
   - Apply **Amber Warning** badge to any link weaker than -115 dBm.
-- [ ] T015 Render next-packet arrival countdown timer ("Next packet expected in ~X mins") for router-discovered nodes using `dueInMinutes = max(0, SM - MM)`.
+- [x] T015 Render next-packet arrival countdown timer ("Next packet expected in ~X mins") for router-discovered nodes using `dueInMinutes = max(0, SM - MM)`.
 
 ---
 
@@ -57,9 +57,9 @@
 
 **Goal**: Single-click "Add via Router" action issuing `CA: 1` to target router and promoting node to full card on next packet.
 
-- [ ] T016 Implement `POST /api/pair/add_route?routerId=<id>&deviceId=<hex>` in `Gateway/LoRaNetGateway/src/WebHelper.h` queueing `CA: 1` routing command to the router.
-- [ ] T017 Attach "Add via Router" button to router candidate cards triggering `POST /api/pair/add_route`.
-- [ ] T018 Automatically promote device to a full `DeviceType::New` card when the router forwards the next scheduled packet with `MR: <routerID>`.
+- [x] T016 Implement `POST /api/pair/add_route?routerId=<id>&deviceId=<hex>` in `Gateway/LoRaNetGateway/src/WebHelper.h` queueing `CA: 1` routing command to the router.
+- [x] T017 Attach "Add via Router" button to router candidate cards triggering `POST /api/pair/add_route`.
+- [x] T018 Automatically promote device to a full `DeviceType::New` card when the router forwards the next scheduled packet with `MR: <routerID>`.
 
 ---
 
@@ -67,7 +67,7 @@
 
 **Goal**: End-to-end automated testing, live hardware flashing, and manual testing pause.
 
-- [ ] T019 Update `Gateway/LoRaNetGateway/scripts/test_gateway_harness.py` with test methods for `/adddevice` HTML validation, synthetic LoRa discovery, and `QN` router response simulation.
-- [ ] T020 Compile firmware with `pio run` and verify zero errors.
-- [ ] T021 Flash firmware to Gateway hardware (`pio run -t upload`) and run automated dual-surface regression suite.
-- [ ] T022 Pause for user manual device testing and verification before requesting commit and Pull Request creation.
+- [x] T019 Update `Gateway/LoRaNetGateway/scripts/test_gateway_harness.py` with test methods for `/adddevice` HTML validation, synthetic LoRa discovery, and `QN` router response simulation.
+- [x] T020 Compile firmware with `pio run` and verify zero errors.
+- [x] T021 Flash firmware to Gateway hardware (`pio run -t upload`) and run automated dual-surface regression suite.
+- [x] T022 Pause for user manual device testing and verification before requesting commit and Pull Request creation.
