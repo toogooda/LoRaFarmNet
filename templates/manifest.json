@@ -64,11 +64,11 @@
   },
   {
     "dtid": 7,
-    "name": "Repeater Node v1.2",
-    "hw": 1.2,
-    "minfw": "0",
+    "name": "Repeater Node v1.6",
+    "hw": 1.6,
+    "minfw": "1.7",
     "catid": 7,
-    "filename": "Router1_2.typ",
+    "filename": "Router1_6.typ",
     "enabled": true
   },
   {
