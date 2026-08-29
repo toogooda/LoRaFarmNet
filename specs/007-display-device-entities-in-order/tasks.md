@@ -36,6 +36,6 @@
 
 ## Phase 4: Polish & Live Verification
 
-- [x] T008 [P] Test live webpage at `http://192.168.68.104/device?deviceid=fc0fe71454d8` using `read_url_content` to verify entity ordering and empty port placement
+- [x] T008 [P] Test live webpage at `http://<ip_address>/device?deviceid=fc0fe71454d8` using `read_url_content` to verify entity ordering and empty port placement
 - [x] T009 Hand over for user manual verification on hardware
 - [x] T010 Create Pull Request for `Gateway/LoRaNetGateway` and update GitHub Issue #7 upon user approval

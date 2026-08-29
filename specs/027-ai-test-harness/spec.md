@@ -105,7 +105,7 @@ As a developer working with the AI coding assistant, I want the AI instructions 
 Review `.agents/rules/` and verify that the mandatory checklist includes reading `platformio.ini` for serial monitoring parameters and running automated test injections via `AITestHarness` during the verification phase.
 
 **Acceptance Scenarios**:
-1. **Given** an AI agent implementing a Gateway feature, **When** code compilation passes, **Then** the AI inspects `platformio.ini` to discover the configured serial port (e.g., `COM3`) and `monitor_speed` (e.g., `115200`), asks for the Gateway IP address (if not already known), enables Test Mode, executes test injections via `AITestHarness`, observes serial logs, validates JSON responses, and restores network state before requesting final human verification.
+1. **Given** an AI agent implementing a Gateway feature, **When** code compilation passes, **Then** the AI inspects `platformio.ini` to discover the configured serial port (e.g., `COM14`) and `monitor_speed` (e.g., `115200`), asks for the Gateway IP address (if not already known), enables Test Mode, executes test injections via `AITestHarness`, observes serial logs, validates JSON responses, and restores network state before requesting final human verification.
 
 ---
 

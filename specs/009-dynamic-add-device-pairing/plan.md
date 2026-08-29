@@ -91,7 +91,7 @@ Extend `test_gateway_harness.py` to validate all real-time SSE discovery, router
    ```
 3. **Automated Dual-Surface Regression Suite**:
    ```powershell
-   python scripts/test_gateway_harness.py --ip 192.168.68.104 --run-suite
+   python scripts/test_gateway_harness.py --ip <ip_address> --run-suite
    ```
 
 ### Manual Verification

@@ -28,6 +28,6 @@
 
 ## Phase 3: Polish & Verification
 
-- [x] T005 Upload firmware to Gateway on COM3, wait 30s, and fetch live webpage at `http://192.168.68.104/` using `read_url_content` to verify mini view icon and DT persistence
+- [x] T005 Upload firmware to Gateway (using `upload_port` from `platformio.ini`), wait 30s, and fetch live webpage at `http://<ip_address>/` using `read_url_content` to verify mini view icon and DT persistence
 - [x] T006 Hand over for user manual verification on hardware
 - [x] T007 Create Pull Request for `Gateway/LoRaNetGateway` and update GitHub Issue #11 upon user approval

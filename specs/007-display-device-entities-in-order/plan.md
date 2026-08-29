@@ -100,7 +100,7 @@ To support rendering configured entities in order followed by unconfigured ports
 
 ### Manual Verification
 - Deploy firmware to ESP32 Gateway and allow ~30 seconds for startup.
-- Fetch live rendered device page at `http://192.168.68.104/device?deviceid=fc0fe71454d8`.
+- Fetch live rendered device page at `http://<ip_address>/device?deviceid=fc0fe71454d8`.
 - Verify configured entities display in ascending `DisplayOrder` below the Options card.
 - Verify empty/unconfigured ports (such as `CS`, `SM`, `OR`, `FW`, `PD`, `P1`) render grouped after all configured entities at the bottom of the page.
 - Then hand over for Manual checks.

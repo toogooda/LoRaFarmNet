@@ -18,7 +18,7 @@
 **Language/Version**: C++11 / Arduino framework on ESP32-WROVER  
 **Primary Dependencies**: `AsyncTCP`, `ESPAsyncWebServer`, `FarmNetwork` models, `SD`  
 **Storage**: SD card file `/lfm/data/network.dat`  
-**Testing**: Build verification (`pio run`) + Web UI manual verification on `http://192.168.68.104/`  
+**Testing**: Build verification (`pio run`) + Web UI manual verification on `http://<ip_address>/`  
 **Target Platform**: ESP32-WROVER (Gateway)  
 **Project Type**: Embedded Web Application / Gateway Firmware  
 

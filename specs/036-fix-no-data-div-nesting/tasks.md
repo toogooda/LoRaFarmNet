@@ -16,11 +16,11 @@
 
 - [x] **Task 3: Build Verification & Hardware Upload**
   - Run `pio run -e gateway-test` to compile.
-  - Run `pio run -e gateway-test -t upload` to flash Gateway hardware on `COM3`.
+  - Run `pio run -e gateway-test -t upload` to flash Gateway hardware (using `upload_port` from `platformio.ini`).
 
 - [x] **Task 4: Automated & Live Surface Verification**
-  - Fetch `http://192.168.68.104/` and verify live DOM structure.
-  - Run regression test suite: `python scripts/test_gateway_harness.py --ip 192.168.68.104 --run-suite`.
+  - Fetch `http://<ip_address>/` and verify live DOM structure.
+  - Run regression test suite: `python scripts/test_gateway_harness.py --ip <ip_address> --run-suite`.
 
 - [ ] **Task 5: Mandatory Manual Testing Pause & PR**
   - Pause for user manual browser verification.

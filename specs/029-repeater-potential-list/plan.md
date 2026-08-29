@@ -108,7 +108,7 @@ Refactor `LoRaNetRepeaterNode` firmware ([Nodes/LoraNodeRepeater/src/main.cpp](f
 
 ### Manual Verification
 1. Flash repeater node using AVRISP mkII (`pio run -t upload`).
-2. Monitor serial output on COM3 at 115200 baud.
+2. Monitor serial output on configured serial port (`monitor_port` in `platformio.ini`) at 115200 baud.
 3. Transmit packets from unrouted node; verify `PotentialList` logs ingestion and updates.
 4. Verify Gateway `/adddevice` router query discovers the remote node.
 5. Close GitHub Issue #29 upon successful deployment and merge.

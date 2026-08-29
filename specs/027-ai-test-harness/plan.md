@@ -142,7 +142,7 @@ The Gateway data model contains multi-level **1-to-many linked list relationship
 
 ### 4. Serial Debugging Protocol
 - `platformio.ini` is inspected for:
-  - `upload_port = COM3`
+  - `upload_port = COM14`
   - `monitor_speed = 115200`
   - `monitor_filters = direct, time, esp32_exception_decoder`
 - AI/scripts can open serial listeners during test runs to verify console logs (`MSG: To: ... From: ...`, `RSSI: ... SNR: ...`) and monitor for ESP32 panics.
@@ -186,7 +186,7 @@ The Gateway data model contains multi-level **1-to-many linked list relationship
 ### Component 4: AI Workflow Documentation & Rules
 1. Create `.agents/rules/ai_testing_workflow.md` documenting the autonomous Gateway test loop:
    - **Upload Firmware**: Execute `pio run -t upload` using the configured `upload_port` from `platformio.ini`.
-   - **Serial Monitor IP Discovery**: Connect to the serial port (`upload_port` / `monitor_port` at 115200 baud) and monitor boot output until `IP Address:<ip>` is printed (e.g., `IP Address:192.168.68.104`).
+   - **Serial Monitor IP Discovery**: Connect to the serial port (`upload_port` / `monitor_port` at 115200 baud) and monitor boot output until `IP Address:<ip>` is printed.
    - **Settling Delay**: Wait 3 additional seconds after IP announcement to ensure webserver initialization, mDNS, and internal tasks are fully ready and listening.
    - **Automated Test Execution**: Call `POST /settings/testmode` &rarr; `POST /api/test/snapshot` &rarr; execute test injections & assertions via `test_gateway_harness.py` &rarr; `POST /api/test/restore`.
 2. Update `.specify/memory/constitution.md` with the autonomous testing gate and serial IP discovery protocol.

@@ -13,7 +13,7 @@ When the Gateway boots or restarts (or when newly paired devices have not yet tr
 
 In `sendDevice()` ([`WebHelper.h`](file:///c:/Users/USER/Projects/LoRaFarmNet/Gateway/LoRaNetGateway/src/WebHelper.h)), the `!s || !d->getHasData()` branch and `DeviceType::New` branch prematurely closed the outer container `<div>` with an extra closing tag (`</div></div>` and `</div></div></div>`), while a trailing `response->print("</div>");` unconditionally executed at the end of `sendDevice()`.
 
-### Live Hardware Reproduction Trace (from `GET http://192.168.68.104/`)
+### Live Hardware Reproduction Trace (from `GET http://<ip_address>/`)
 When restarting the Gateway running test build with 2 routers (`Router Top` ID:100, `Test Router` ID:101) in Category 7 (`Repeater` set to Mini view):
 ```html
 <div class='card mb-4 border-0 shadow-sm' style='max-width: 600px; margin: 0 auto;'>

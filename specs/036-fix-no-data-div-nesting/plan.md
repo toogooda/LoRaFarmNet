@@ -19,8 +19,8 @@ Fix `sendDevice()` in `Gateway/LoRaNetGateway/src/WebHelper.h` to balance `<div>
   - `Gateway/LoRaNetGateway/src/HomePageChunkedResponse.cpp`: `_fillBuffer()` State 1, 2, 3, 4
 - **Testing**:
   - Compilation: `pio run -e gateway-test`
-  - Automated Regression Harness: `python scripts/test_gateway_harness.py --ip 192.168.68.104 --run-suite`
-  - Live DOM Inspection: `GET http://192.168.68.104/`
+  - Automated Regression Harness: `python scripts/test_gateway_harness.py --ip <ip_address> --run-suite`
+  - Live DOM Inspection: `GET http://<ip_address>/`
 
 ---
 
@@ -58,7 +58,7 @@ Fix `sendDevice()` in `Gateway/LoRaNetGateway/src/WebHelper.h` to balance `<div>
 ```powershell
 & "C:\Users\USER\.platformio\penv\Scripts\platformio.exe" run -e gateway-test -t upload
 ```
-Fetch `GET http://192.168.68.104/` and assert:
+Fetch `GET http://<ip_address>/` and assert:
 - `Router Top` is inside `.full-view-container-7`.
 - `Test Router` is inside `.full-view-container-7`.
 - `.mini-view-container-7` is strictly inside `#cat-card-body-7` and `<div class='card'>`.
@@ -66,5 +66,5 @@ Fetch `GET http://192.168.68.104/` and assert:
 
 ### 3. Regression Suite
 ```powershell
-python scripts/test_gateway_harness.py --ip 192.168.68.104 --run-suite
+python scripts/test_gateway_harness.py --ip <ip_address> --run-suite
 ```
