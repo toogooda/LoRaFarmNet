@@ -27,6 +27,6 @@
   - Run regression test suite: `python scripts/test_gateway_harness.py --ip <ip_address> --run-suite`.
   - Run SSE test suite: `python scripts/test_pair_sse.py <ip_address>`.
 
-- [ ] **Task 5: Mandatory Manual Testing Pause & PR**
+- [x] **Task 5: Mandatory Manual Testing Pause & PR**
   - Pause for user manual browser/hardware testing.
   - Upon approval, ask for permission to push and create Pull Request on `toogooda/LoRaNetGateway`.
