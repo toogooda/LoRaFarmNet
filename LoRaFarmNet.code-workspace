@@ -31,6 +31,10 @@
 		{
 			"name": "LoraNodeWaterTankLevel",
 			"path": "Nodes/LoraNodeWaterTankLevel"
+		},
+		{
+			"name": "STM32LoRaNode",
+			"path": "Nodes/STM32LoRaNode"
 		}
 	],
 	"settings": {}
