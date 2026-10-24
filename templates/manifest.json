@@ -97,5 +97,14 @@
     "catid": 1,
     "filename": "TankLevel1_3.typ",
     "enabled": true
+  },
+  {
+    "dtid": 21,
+    "name": "STM Water Tank Level",
+    "hw": 2.0,
+    "minfw": "0",
+    "catid": 1,
+    "filename": "STMWaterTankLevel.typ",
+    "enabled": true
   }
 ]
