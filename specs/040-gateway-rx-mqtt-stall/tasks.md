@@ -46,12 +46,12 @@
   - `pio run -e gateway-test` (SUCCESS)
 - [x] T008 Flash test firmware (`pio run -e gateway-test -t upload`), verify dynamic serial IP (`192.168.68.97`), and execute full automated regression suite:
   - `python scripts/test_gateway_harness.py --ip 192.168.68.97 --run-suite` (ALL 12 TESTS PASSED)
-- [ ] T009 **MANDATORY HUMAN MANUAL TESTING GATE (CRITICAL RULE)**:
-  - Pause and notify user to manually verify web dashboard and fire off a physical LoRa message from a node to verify over-the-air RF reception.
+- [x] T009 **MANDATORY HUMAN MANUAL TESTING GATE (CRITICAL RULE)**:
+  - Pause and notify user to manually verify web dashboard and fire off a physical LoRa message from a node to verify over-the-air RF reception. (COMPLETED & VERIFIED)
 
 ---
 
 ## Phase 6: Pull Request & Issue Closure
 
-- [ ] T010 Ask user permission to push feature branch `040-gateway-rx-mqtt-stall` and open GitHub Pull Request.
+- [x] T010 Ask user permission to push feature branch `040-gateway-rx-mqtt-stall` and open GitHub Pull Request.
 - [ ] T011 Upon PR merge, pull `master`, delete local and remote branches, update and close GitHub issue [toogooda/LoRaFarmNet#39](https://github.com/toogooda/LoRaFarmNet/issues/39).
