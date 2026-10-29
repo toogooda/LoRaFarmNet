@@ -53,5 +53,4 @@
 
 ## Phase 6: Pull Request & Issue Closure
 
-- [x] T010 Ask user permission to push feature branch `040-gateway-rx-mqtt-stall` and open GitHub Pull Request.
-- [ ] T011 Upon PR merge, pull `master`, delete local and remote branches, update and close GitHub issue [toogooda/LoRaFarmNet#39](https://github.com/toogooda/LoRaFarmNet/issues/39).
+- [x] T011 Upon PR merge, pull `master`, delete local and remote branches, update and close GitHub issue [toogooda/LoRaFarmNet#39](https://github.com/toogooda/LoRaFarmNet/issues/39). (COMPLETED - v1.7.4 Released)
