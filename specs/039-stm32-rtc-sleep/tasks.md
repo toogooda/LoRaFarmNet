@@ -31,3 +31,8 @@
     - SRAM preservation: `MI` counter incremented from 0 to 1 across sleep cycles.
     - Subsequent cycles continue smoothly without hangs.
   - Paused for user manual confirmation before pushing or creating Pull Request.
+
+- [x] **Task 6: Pull Request & Cleanup**
+  - Pushed `039-stm32-rtc-sleep` to GitHub and updated Pull Request [toogooda/STM32LoRaNode#1](https://github.com/toogooda/STM32LoRaNode/pull/1).
+  - PR merged into `main` by user.
+  - Switched to `main`, pulled latest changes, and deleted local and remote `039-stm32-rtc-sleep` branches.
